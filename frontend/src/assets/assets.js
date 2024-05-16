@@ -47,11 +47,6 @@ import food_32 from './food_32.png'
 import add_icon_white from './add_icon_white.png'
 import add_icon_green from './add_icon_green.png'
 import remove_icon_red from './remove_icon_red.png'
-import app_store from './app_store.png'
-import play_store from './play_store.png'
-import linkedin_icon from './linkedin_icon.png'
-import facebook_icon from './facebook_icon.png'
-import twitter_icon from './twitter_icon.png'
 import cross_icon from './cross_icon.png'
 import selector_icon from './selector_icon.png'
 import rating_starts from './rating_starts.png'
@@ -69,11 +64,6 @@ export const assets = {
     add_icon_green,
     add_icon_white,
     remove_icon_red,
-    app_store,
-    play_store,
-    linkedin_icon,
-    facebook_icon,
-    twitter_icon,
     cross_icon,
     selector_icon,
     profile_icon,
@@ -84,35 +74,35 @@ export const assets = {
 
 export const menu_list = [
     {
-        menu_name: "Salad",
+        menu_name: "Salate",
         menu_image: menu_1
     },
     {
-        menu_name: "Rolls",
+        menu_name: "Rulade",
         menu_image: menu_2
     },
     {
-        menu_name: "Deserts",
+        menu_name: "Deserturi",
         menu_image: menu_3
     },
     {
-        menu_name: "Sandwich",
+        menu_name: "Sandvișuri",
         menu_image: menu_4
     },
     {
-        menu_name: "Cake",
+        menu_name: "Garnituri",
         menu_image: menu_5
     },
     {
-        menu_name: "Pure Veg",
+        menu_name: "Pește",
         menu_image: menu_6
     },
     {
-        menu_name: "Pasta",
+        menu_name: "Paste",
         menu_image: menu_7
     },
     {
-        menu_name: "Noodles",
+        menu_name: "Băuturi",
         menu_image: menu_8
     }]
 
@@ -148,32 +138,32 @@ export const food_list = [
         category: "Salad"
     }, {
         _id: "5",
-        name: "Lasagna Rolls",
+        name: "Lasagna Rulade",
         image: food_5,
         price: 14,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
+        category: "Rulade"
     }, {
         _id: "6",
-        name: "Peri Peri Rolls",
+        name: "Peri Peri Rulade",
         image: food_6,
         price: 12,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
+        category: "Rulade"
     }, {
         _id: "7",
-        name: "Chicken Rolls",
+        name: "Chicken Rulade",
         image: food_7,
         price: 20,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
+        category: "Rulade"
     }, {
         _id: "8",
-        name: "Veg Rolls",
+        name: "Veg Rulade",
         image: food_8,
         price: 15,
         description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
+        category: "Rulade"
     }, {
         _id: "9",
         name: "Ripple Ice Cream",
