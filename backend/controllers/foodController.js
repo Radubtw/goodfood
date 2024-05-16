@@ -17,7 +17,7 @@ const listFood = async (req, res) => {
 const addFood = async (req, res) => {
 
     let image_filename = `${req.file.filename}`
-
+    console.log(req.body); // Log the request body to inspect the received data
     const food = new foodModel({
         name: req.body.name,
         description: req.body.description,

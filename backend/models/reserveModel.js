@@ -1,16 +1,14 @@
 import mongoose from "mongoose";
 
 const reserveSchema = new mongoose.Schema({
-    capacity: {type:String, required:true},
-    year: {type:String, required:true},
-    month: {type:String, required:true},
-    day: {type:String, required:true},
-    hour: {type:String, required:true},
-    minute: {type:String, required:true},
-
-    
+    capacity: {type:Number, required:true},
+    year: {type:Number, required:true},
+    month: {type:Number, required:true},
+    day: {type:Number, required:true},
+    hour: {type:Number, required:true},
+    minute: {type:Number, required:true}  
 })
 
-const reserveModel = /*mongoose.models.reserve ||*/ mongoose.model("reservations", reserveSchema)
+const reserveModel = mongoose.models.reserve || mongoose.model("reserve", reserveSchema);
 
 export default reserveModel;
