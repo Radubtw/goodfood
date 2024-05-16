@@ -10,7 +10,7 @@ const Add = () => {
         name: "",
         description: "",
         price: "",
-        category: "Salad"
+        category: "Salate"
     });
 
     const [image, setImage] = useState(false);
@@ -30,7 +30,7 @@ const Add = () => {
                 name: "",
                 description: "",
                 price: "",
-                category: "Salad"
+                category: "Salate"
             })
             setImage(false);
         }
@@ -49,36 +49,36 @@ const Add = () => {
         <div className='add'>
             <form className='flex-col' onSubmit={onSubmitHandler}>
                 <div className='add-img-upload flex-col'>
-                    <p>Upload image</p>
+                    <p>Încarcă imaginea</p>
                     <label htmlFor="image">
                         <img src={!image ? assets.upload_area : URL.createObjectURL(image)} alt="" />
                     </label>
                     <input onChange={(e) => { setImage(e.target.files[0]) }} type="file" id="image" hidden required />
                 </div>
                 <div className='add-product-name flex-col'>
-                    <p>Product name</p>
-                    <input name='name' onChange={onChangeHandler} value={data.name} type="text" placeholder='Type here' required />
+                    <p>Nume produs</p>
+                    <input name='name' onChange={onChangeHandler} value={data.name} type="text" placeholder='Scrie aici' required />
                 </div>
                 <div className='add-product-description flex-col'>
-                    <p>Product description</p>
-                    <textarea name='description' onChange={onChangeHandler} value={data.description} type="text" rows={6} placeholder='Write content here' required />
+                    <p>Descriere</p>
+                    <textarea name='description' onChange={onChangeHandler} value={data.description} type="text" rows={6} placeholder='Scrie descrierea aici' required />
                 </div>
                 <div className='add-category-price'>
                     <div className='add-category flex-col'>
-                        <p>Product category</p>
+                        <p>Categorii</p>
                         <select name='category' onChange={onChangeHandler} >
-                            <option value="Salad">Salad</option>
-                            <option value="Rolls">Rolls</option>
-                            <option value="Deserts">Deserts</option>
-                            <option value="Sandwich">Sandwich</option>
-                            <option value="Cake">Cake</option>
-                            <option value="Pure Veg">Pure Veg</option>
-                            <option value="Pasta">Pasta</option>
-                            <option value="Noodles">Noodles</option>
+                            <option value="Salate">Salate</option>
+                            <option value="Rulade">Rulade</option>
+                            <option value="Deserturi">Deserturi</option>
+                            <option value="Sandvișuri">Sandvișuri</option>
+                            <option value="Garnituri">Garnituri</option>
+                            <option value="Pește">Pește</option>
+                            <option value="Paste">Paste</option>
+                            <option value="Băuturi">Băuturi</option>
                         </select>
                     </div>
                     <div className='add-price flex-col'>
-                        <p>Product Price</p>
+                        <p>Preț</p>
                         <input type="Number" name='price' onChange={onChangeHandler} value={data.price} placeholder='25 RON' />
                     </div>
                 </div>
