@@ -41,7 +41,7 @@ const ReserveTable = () => {
         });
         // After submission, hide the form
         setShowForm(false);
-        toast.succes("Rezervare plasată cu succes");
+        toast.success("Rezervare plasată cu succes");
     };
     
 

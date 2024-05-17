@@ -51,13 +51,16 @@ const PlaceOrder = () => {
             window.location.replace(session_url);
         }
         else {
-            toast.error("Something Went Wrong")
+            toast.success("Comanda plasată cu succes");
+            setCartItems({});
+            navigate('/');
         }
     }
+    
 
     useEffect(() => {
         if (!token) {
-            toast.error("to place an order sign in first")
+            toast.error("pentru a comanda este necesară autentificarea")
             navigate('/cart')
         }
         else if (getTotalCartAmount() === 0) {
@@ -68,35 +71,35 @@ const PlaceOrder = () => {
     return (
         <form onSubmit={placeOrder} className='place-order'>
             <div className="place-order-left">
-                <p className='title'>Delivery Information</p>
+                <p className='title'>Detaliile comenzii</p>
                 <div className="multi-field">
-                    <input type="text" name='firstName' onChange={onChangeHandler} value={data.firstName} placeholder='First name' required />
-                    <input type="text" name='lastName' onChange={onChangeHandler} value={data.lastName} placeholder='Last name' required />
+                    <input type="text" name='firstName' onChange={onChangeHandler} value={data.firstName} placeholder='Nume' required />
+                    <input type="text" name='lastName' onChange={onChangeHandler} value={data.lastName} placeholder='Prenume' required />
                 </div>
-                <input type="email" name='email' onChange={onChangeHandler} value={data.email} placeholder='Email address' required />
-                <input type="text" name='street' onChange={onChangeHandler} value={data.street} placeholder='Street' required />
+                <input type="email" name='email' onChange={onChangeHandler} value={data.email} placeholder='Email' required />
+                <input type="text" name='street' onChange={onChangeHandler} value={data.street} placeholder='Stradă' required />
                 <div className="multi-field">
-                    <input type="text" name='city' onChange={onChangeHandler} value={data.city} placeholder='City' required />
-                    <input type="text" name='state' onChange={onChangeHandler} value={data.state} placeholder='State' required />
+                    <input type="text" name='city' onChange={onChangeHandler} value={data.city} placeholder='Oraș' required />
+                    <input type="text" name='state' onChange={onChangeHandler} value={data.state} placeholder='Județ' required />
                 </div>
                 <div className="multi-field">
-                    <input type="text" name='zipcode' onChange={onChangeHandler} value={data.zipcode} placeholder='Zip code' required />
-                    <input type="text" name='country' onChange={onChangeHandler} value={data.country} placeholder='Country' required />
+                    <input type="text" name='zipcode' onChange={onChangeHandler} value={data.zipcode} placeholder='Cod poștal' required />
+                    <input type="text" name='country' onChange={onChangeHandler} value={data.country} placeholder='Țară' required />
                 </div>
-                <input type="text" name='phone' onChange={onChangeHandler} value={data.phone} placeholder='Phone' required />
+                <input type="text" name='phone' onChange={onChangeHandler} value={data.phone} placeholder='Număr de telefon' required />
             </div>
             <div className="place-order-right">
                 <div className="cart-total">
-                    <h2>Cart Totals</h2>
+                    <h2>Detalii plată</h2>
                     <div>
-                        <div className="cart-total-details"><p>Subtotal</p><p>{getTotalCartAmount()}RON</p></div>
+                        <div className="cart-total-details"><p>Subtotal</p><p>{getTotalCartAmount()} RON </p></div>
                         <hr />
-                        <div className="cart-total-details"><p>Delivery Fee</p><p>{getTotalCartAmount() === 0 ? 0 : 5}RON</p></div>
+                        <div className="cart-total-details"><p>Taxa de livrare</p><p>{getTotalCartAmount() === 0 ? 0 : 5} RON </p></div>
                         <hr />
-                        <div className="cart-total-details"><b>Total</b><b>{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 5}RON</b></div>
+                        <div className="cart-total-details"><b>Total</b><b>{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 5} RON </b></div>
                     </div>
                 </div>
-                <button className='place-order-submit' type='submit'>Proceed To Payment</button>
+                <button className='place-order-submit' type='submit'>Continuați plata</button>
             </div>
         </form>
     )
