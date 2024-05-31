@@ -8,27 +8,21 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-content-left">
             <img src={assets.logo} alt="" />
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-            <div className="footer-social-icons">
-                <img src={assets.facebook_icon} alt="" />
-                <img src={assets.twitter_icon} alt="" />
-                <img src={assets.linkedin_icon} alt="" />
-            </div>
         </div>
         <div className="footer-content-center">
-            <h2>COMPANY</h2>
+            <h2>S.C. GoodFood S.R.L.</h2>
             <ul>
-                <li>Home</li>
-                <li>About us</li>
-                <li>Delivery</li>
-                <li>Privacy policy</li>
+                <li>Adresă:  Calea Victoriei Nr. 95</li>
+                <li><h3>Program:</h3></li>
+                <li>Luni-Vineri: 10-24</li>
+                <li>Sâmbătă-Duminică: 12-23</li>
             </ul>
         </div>
         <div className="footer-content-right">
-            <h2>GET IN TOUCH</h2>
+            <h2>Contactați-ne!</h2>
             <ul>
-                <li>+1-212-456-7890</li>
-                <li>contact@tomato.com</li>
+                <li>Telefon: 076969420</li>
+                <li>E-mail: contact@goodfood.com</li>
             </ul>
         </div>
       </div>
