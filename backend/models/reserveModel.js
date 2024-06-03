@@ -7,7 +7,7 @@ const reserveSchema = new mongoose.Schema({
     day: {type:Number, required:true},
     hour: {type:Number, required:true},
     minute: {type:Number, required:true}  
-})
+});
 
 const reserveModel = mongoose.models.reserve || mongoose.model("reserve", reserveSchema);
 

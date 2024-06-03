@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react'
 import './ReserveTable.css';
 import { assets } from '../../assets/assets';
 import { toast } from 'react-toastify';
+import { StoreContext } from '../../Context/StoreContext'
+
+const BASE_URL = 'http://localhost:4000';
+
 const ReserveTable = () => {
+    const { token } = useContext(StoreContext);
     const [showForm, setShowForm] = useState(false);
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        date: '',
-        time: ''
+    const [reservationData, setReservationData] = useState({
+        capacity: '',
+        year: '',
+        month: '',
+        day: '',
+        hour: '',
+        minute: ''
     });
 
     const handleImageClick = () => {
@@ -18,32 +24,53 @@ const ReserveTable = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prevState => ({
+        setReservationData(prevState => ({
             ...prevState,
             [name]: value
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you can handle form submission
-        // For now, let's just log the form data
-        console.log('Form submitted:', formData);
-        // Show toast notification
+        console.log('Reservation data:', reservationData);
+        if (!token) {
+            toast.error("Pentru a face o rezervare este necesară autentificarea");
+            navigate('/login'); // Redirect the user to the login page if not authenticated
+            return;
+        }
+        try {
+            const response = await fetch(`${BASE_URL}/api/reserve/add` , {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(reservationData)
+            });
+            console.log(response);
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data); // Log the response from the server
+                toast.success("Rezervare plasată cu succes");
+            } else {
+                throw new Error('Failed to add reservation');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error("A apărut o eroare. Rezervarea nu a putut fi plasată.");
+        }
         
-        // After submission, clear the form data
-        setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            date: '',
-            time: ''
-        });
-        // After submission, hide the form
         setShowForm(false);
-        toast.success("Rezervare plasată cu succes");
+        setReservationData({
+            capacity: '',
+            year: '',
+            month: '',
+            day: '',
+            hour: '',
+            minute: ''
+        });
     };
     
+  
 
     return (
         <div className='reserve-table' id='reserve-table'>
@@ -53,60 +80,68 @@ const ReserveTable = () => {
                     <img src={assets.table} alt="" onClick={handleImageClick} />
                     <p>O persoană</p>
                 </div>
-                <div className="table">
+                
+                 <div className="table">
                     <img src={assets.table} alt="" onClick={handleImageClick} />
                     <p>Două persoane</p>
                 </div>
                 <div className="table">
                     <img src={assets.table} alt="" onClick={handleImageClick} />
-                    <p>Patru persoane</p>
+                    <p>Patru Persoane</p>
                 </div>
-                <div className="table">
+                
+                 <div className="table">
                     <img src={assets.table} alt="" onClick={handleImageClick} />
-                    <p>Șase persoane</p>
-                </div>
-                <div className="table">
-                    <img src={assets.table} alt="" onClick={handleImageClick} />
-                    <p>Opt persoane</p>
+                    <p>Opt Persoane</p>
                 </div>
             </div>
             {showForm && (
                 <form className="reservation-form" onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        name="name"
-                        placeholder="Name"
-                        value={formData.name}
+                        name="capacity"
+                        placeholder="Capacity"
+                        value={reservationData.capacity}
                         onChange={handleChange}
                         required
                     />
                     <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={formData.email}
+                        type="number"
+                        name="year"
+                        placeholder="Year"
+                        value={reservationData.year}
                         onChange={handleChange}
                         required
                     />
                     <input
-                        type="tel"
-                        name="phone"
-                        placeholder="Phone Number"
-                        value={formData.phone}
+                        type="number"
+                        name="month"
+                        placeholder="Month"
+                        value={reservationData.month}
                         onChange={handleChange}
                         required
                     />
                     <input
-                        type="date"
-                        name="date"
-                        value={formData.date}
+                        type="number"
+                        name="day"
+                        placeholder="Day"
+                        value={reservationData.day}
                         onChange={handleChange}
                         required
                     />
                     <input
-                        type="time"
-                        name="time"
-                        value={formData.time}
+                        type="number"
+                        name="hour"
+                        placeholder="Hour"
+                        value={reservationData.hour}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="number"
+                        name="minute"
+                        placeholder="Minute"
+                        value={reservationData.minute}
                         onChange={handleChange}
                         required
                     />
@@ -116,6 +151,5 @@ const ReserveTable = () => {
         </div>
     );
 };
-
 
 export default ReserveTable;
