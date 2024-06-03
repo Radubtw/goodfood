@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import './ReserveTable.css';
 import { assets } from '../../assets/assets';
 import { toast } from 'react-toastify';
-import { StoreContext } from '../../Context/StoreContext'
+import { StoreContext } from '../../Context/StoreContext';
 
 const BASE_URL = 'http://localhost:4000';
 
@@ -10,7 +10,7 @@ const ReserveTable = () => {
     const { token } = useContext(StoreContext);
     const [showForm, setShowForm] = useState(false);
     const [reservationData, setReservationData] = useState({
-        capacity: '',
+        capacity: 0, // Default capacity is set to 0
         year: '',
         month: '',
         day: '',
@@ -18,7 +18,11 @@ const ReserveTable = () => {
         minute: ''
     });
 
-    const handleImageClick = () => {
+    const handleImageClick = (capacity) => {
+        setReservationData(prevState => ({
+            ...prevState,
+            capacity: capacity // Set the capacity based on the clicked table
+        }));
         setShowForm(true);
     };
 
@@ -35,11 +39,12 @@ const ReserveTable = () => {
         console.log('Reservation data:', reservationData);
         if (!token) {
             toast.error("Pentru a face o rezervare este necesară autentificarea");
-            navigate('/login'); // Redirect the user to the login page if not authenticated
+            // Redirect the user to the login page if not authenticated
+            // Example: navigate('/login');
             return;
         }
         try {
-            const response = await fetch(`${BASE_URL}/api/reserve/add` , {
+            const response = await fetch(`${BASE_URL}/api/reserve/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -61,7 +66,7 @@ const ReserveTable = () => {
         
         setShowForm(false);
         setReservationData({
-            capacity: '',
+            capacity: 0,
             year: '',
             month: '',
             day: '',
@@ -70,41 +75,31 @@ const ReserveTable = () => {
         });
     };
     
-  
-
     return (
         <div className='reserve-table' id='reserve-table'>
             <p> Rezervare mese</p>
             <div className="tables">
-                <div className="table">
-                    <img src={assets.table} alt="" onClick={handleImageClick} />
+                <div className="table" onClick={() => handleImageClick(1)}>
+                    <img src={assets.table} alt="" />
                     <p>O persoană</p>
                 </div>
                 
-                 <div className="table">
-                    <img src={assets.table} alt="" onClick={handleImageClick} />
+                <div className="table" onClick={() => handleImageClick(2)}>
+                    <img src={assets.table} alt="" />
                     <p>Două persoane</p>
                 </div>
-                <div className="table">
-                    <img src={assets.table} alt="" onClick={handleImageClick} />
+                <div className="table" onClick={() => handleImageClick(4)}>
+                    <img src={assets.table} alt="" />
                     <p>Patru Persoane</p>
                 </div>
                 
-                 <div className="table">
-                    <img src={assets.table} alt="" onClick={handleImageClick} />
+                <div className="table" onClick={() => handleImageClick(8)}>
+                    <img src={assets.table} alt="" />
                     <p>Opt Persoane</p>
                 </div>
             </div>
             {showForm && (
                 <form className="reservation-form" onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        name="capacity"
-                        placeholder="Capacity"
-                        value={reservationData.capacity}
-                        onChange={handleChange}
-                        required
-                    />
                     <input
                         type="number"
                         name="year"
