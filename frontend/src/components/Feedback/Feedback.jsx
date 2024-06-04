@@ -1,148 +1,73 @@
 import React, { useContext, useState } from 'react';
 import './Feedback.css';
-import { assets } from '../../assets/assets';
 import { toast } from 'react-toastify';
 import { StoreContext } from '../../Context/StoreContext';
 
-const BASE_URL = 'http://localhost:4000';
-
 const Feedback = () => {
-    const { token } = useContext(StoreContext);
-    const [showForm, setShowForm] = useState(false);
-    const [reservationData, setReservationData] = useState({
-        capacity: 0, // Default capacity is set to 0
-        year: '',
-        month: '',
-        day: '',
-        hour: '',
-        minute: ''
-    });
+    const [rating, setRating] = useState(0);
+    const [submitted, setSubmitted] = useState(false);
+    const { user } = useContext(StoreContext);
 
-    const handleImageClick = (capacity) => {
-        setReservationData(prevState => ({
-            ...prevState,
-            capacity: capacity // Set the capacity based on the clicked table
-        }));
-        setShowForm(true);
+    const handleRatingClick = (star) => {
+        setRating(star);
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setReservationData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log('Reservation data:', reservationData);
-        if (!token) {
-            toast.error("Pentru a face o rezervare este necesară autentificarea");
-            // Redirect the user to the login page if not authenticated
-            // Example: navigate('/login');
+    const handleSubmit = async () => {
+        if (submitted) {
             return;
         }
+
         try {
-            const response = await fetch(`${BASE_URL}/api/reserve/add`, {
+            if (!user || !user.email) {
+                throw new Error('User data is missing or incomplete');
+            }
+
+            const response = await fetch('/api/feedback/add', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(reservationData)
+                body: JSON.stringify({
+                    email: user.email,
+                    feedback: rating
+                }),
             });
-            console.log(response);
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data); // Log the response from the server
-                toast.success("Rezervare plasată cu succes");
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+                setSubmitted(true);
+                toast.success('Feedback-ul tău a fost trimis cu succes. Mulțumim!');
             } else {
-                throw new Error('Failed to add reservation');
+                throw new Error(data.message || 'Unknown error');
             }
         } catch (error) {
-            console.error('Error:', error);
-            toast.error("A apărut o eroare. Rezervarea nu a putut fi plasată.");
+            console.error('There was an error!', error);
+            toast.error('Feedback-ul nu a putut fi trimis. Te rugăm să încerci din nou mai târziu.');
         }
-        
-        setShowForm(false);
-        setReservationData({
-            capacity: 0,
-            year: '',
-            month: '',
-            day: '',
-            hour: '',
-            minute: ''
-        });
     };
-    
+
     return (
-        <div className='feedback' id='feedback'>
-            <p> Rezervare mese</p>
-            <div className="tables">
-                <div className="table" onClick={() => handleImageClick(1)}>
-                    <img src={assets.table} alt="" />
-                    <p>O persoană</p>
+        <div className='feedback-container'>
+            <div className='feedback' id='feedback'>
+                <p>Feedback</p>
+                <div className="star-rating">
+                    {[1, 2, 3, 4, 5].map(star => (
+                        <span
+                            key={star}
+                            className={star <= rating ? 'star filled' : 'star'}
+                            onClick={() => handleRatingClick(star)}
+                        >
+                            &#9733;
+                        </span>
+                    ))}
                 </div>
-                
-                <div className="table" onClick={() => handleImageClick(2)}>
-                    <img src={assets.table} alt="" />
-                    <p>Două persoane</p>
-                </div>
-                <div className="table" onClick={() => handleImageClick(4)}>
-                    <img src={assets.table} alt="" />
-                    <p>Patru Persoane</p>
-                </div>
-                
-                <div className="table" onClick={() => handleImageClick(8)}>
-                    <img src={assets.table} alt="" />
-                    <p>Opt Persoane</p>
-                </div>
+                <button  onClick={handleSubmit}>Submit</button>
             </div>
-            {showForm && (
-                <form className="reservation-form" onSubmit={handleSubmit}>
-                    <input
-                        type="number"
-                        name="year"
-                        placeholder="Year"
-                        value={reservationData.year}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="number"
-                        name="month"
-                        placeholder="Month"
-                        value={reservationData.month}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="number"
-                        name="day"
-                        placeholder="Day"
-                        value={reservationData.day}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="number"
-                        name="hour"
-                        placeholder="Hour"
-                        value={reservationData.hour}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="number"
-                        name="minute"
-                        placeholder="Minute"
-                        value={reservationData.minute}
-                        onChange={handleChange}
-                        required
-                    />
-                    <button type="submit">Submit</button>
-                </form>
-            )}      
         </div>
     );
 };
