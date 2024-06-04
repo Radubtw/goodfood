@@ -23,6 +23,9 @@
     margin-top: 10px;
     font-size: 25px; /* Adjust the font size as desired */
 }
+.table.selected img {
+    transform: scale(1.1); /* Increase the size of the image */
+}
 .reservation-form {
     margin-top: 20px;
     padding: 20px; /* Add padding for spacing */

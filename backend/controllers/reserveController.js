@@ -8,12 +8,10 @@ const addReservation = async (req, res) => {
 
     // Construct a new reservation object using the received JSON data
     const reservation = new reserveModel({
+        email: reservationData.email,
         capacity: reservationData.capacity,
-        year: reservationData.year,
-        month: reservationData.month,
-        day: reservationData.day,
+        date: reservationData.date,
         hour: reservationData.hour,
-        minute: reservationData.minute,
     });
 
     try {
@@ -38,4 +36,14 @@ const listReservations = async (req, res) => {
     }
 };
 
-export { addReservation, listReservations };
+const userReservations = async (req, res) => {
+    try {
+        const reservations = await reserveModel.find({ email: req.body.email });
+        res.json({ success: true, data: reservations })
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: "Error" })
+    }
+}
+
+export { addReservation, listReservations, userReservations };

@@ -6,8 +6,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 
 const LoginPopup = ({ setShowLogin }) => {
-
-    const { setToken, url,loadCartData } = useContext(StoreContext)
+    const { setToken, url,loadCartData, setUser } = useContext(StoreContext)
     const [currState, setCurrState] = useState("Înregistrare");
 
     const [data, setData] = useState({
@@ -38,9 +37,7 @@ const LoginPopup = ({ setShowLogin }) => {
             localStorage.setItem("token", response.data.token)
             loadCartData({token:response.data.token})
             setShowLogin(false)
-            //sessionStorage.setItem('email', email);
-            //var current_user = sessionStorage.getItem('email')
-            
+            setUser({ email: data.email }); // Set the user's email
         }
         else {
             toast.error(response.data.message)

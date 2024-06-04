@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const reserveSchema = new mongoose.Schema({
+    email: {type:String, required:true},
     capacity: {type:Number, required:true},
-    year: {type:Number, required:true},
-    month: {type:Number, required:true},
-    day: {type:Number, required:true},
+    date: {type:Date, required:true},
     hour: {type:Number, required:true},
-    minute: {type:Number, required:true}  
+
+
 });
 
 const reserveModel = mongoose.models.reserve || mongoose.model("reserve", reserveSchema);
