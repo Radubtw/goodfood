@@ -3,6 +3,7 @@ import Header from '../../components/Header/Header'
 import ExploreMenu from '../../components/ExploreMenu/ExploreMenu'
 import FoodDisplay from '../../components/FoodDisplay/FoodDisplay'
 import ReserveTable from '../../components/ReserveTable/ReserveTable'
+import Feedback from '../../components/Feedback/Feedback'
 
 const Home = () => {
 
@@ -14,6 +15,7 @@ const Home = () => {
       <ExploreMenu setCategory={setCategory} category={category}/>
       <FoodDisplay category={category}/>
       <ReserveTable/>
+      <Feedback/>
     </>
   )
 }

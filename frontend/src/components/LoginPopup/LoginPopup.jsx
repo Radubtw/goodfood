@@ -38,8 +38,8 @@ const LoginPopup = ({ setShowLogin }) => {
             localStorage.setItem("token", response.data.token)
             loadCartData({token:response.data.token})
             setShowLogin(false)
-            sessionStorage.setItem('email', email);
-            var current_user = sessionStorage.getItem('email')
+            //sessionStorage.setItem('email', email);
+            //var current_user = sessionStorage.getItem('email')
             
         }
         else {

@@ -23,7 +23,7 @@ const Navbar = ({ setShowLogin }) => {
         <Link to="/" onClick={() => setMenu("home")} className={`${menu === "home" ? "active" : ""}`}>acasă</Link>
         <a href='#explore-menu' onClick={() => setMenu("menu")} className={`${menu === "menu" ? "active" : ""}`}>meniu</a>
         <a href='#reserve-table' onClick={() => setMenu("reserve-table")} className={`${menu === "reserve-table" ? "active" : ""}`}>mese</a>
-        <a href='#reserve-table' onClick={() => setMenu("reserve-table")} className={`${menu === "reserve-table" ? "active" : ""}`}>recenzie</a>
+        <a href='#feedback' onClick={() => setMenu("feedback")} className={`${menu === "feedback" ? "active" : ""}`}>recenzie</a>
         <a href='#footer' onClick={() => setMenu("contact")} className={`${menu === "contact" ? "active" : ""}`}>contactați-ne</a>
       </ul>
       <div className="navbar-right">
@@ -44,7 +44,7 @@ const Navbar = ({ setShowLogin }) => {
 
       </div>
     </div>
-  )
+  ) 
 }
 
 export default Navbar
