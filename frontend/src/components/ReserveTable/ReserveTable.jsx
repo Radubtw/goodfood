@@ -52,6 +52,14 @@ const ReserveTable = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Reservation data:', reservationData);
+        if(reservationData.hour < 10 || reservationData.hour > 23){
+            toast.error("Ora introdusa nu este valida, te rugam introdu o ora din intervalul 10-23")
+            return;
+        }
+        if(reservationData.date < Date.now){
+            toast.error("Data introdusa nu este valida");
+            return;
+        }
         try {
             const response = await fetch(`${BASE_URL}/api/reserve/add`, {
                 method: 'POST',
