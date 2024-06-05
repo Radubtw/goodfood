@@ -30,15 +30,15 @@ const Reservations = () => {
     return date.toLocaleDateString('en-US');
   }
   return (
-    <div><h2>Reservations</h2>    
     <div className='reservations-container'>
+      <h2>Reservations</h2>
       <div className="reservation-list">
         {reservations.map((reservation, index) => (
           <div key={index} className='reservation-item'>
             <img src={assets.table_icon} alt="Table Icon" />
             <div className='reservation-details'>
               <p><strong>Email:</strong> {reservation.email}</p>
-              <p><strong>Dat:</strong> {formatDate(reservation.date)}</p>
+              <p><strong>Data:</strong> {formatDate(reservation.date)}</p>
               <p><strong>Ora:</strong> {reservation.hour}:00</p>
               <p><strong>Capacitate Masa:</strong> {reservation.capacity} persoane</p>
             </div>
@@ -46,8 +46,6 @@ const Reservations = () => {
         ))}
       </div>
     </div>
-    </div>
-
   );
 };
 

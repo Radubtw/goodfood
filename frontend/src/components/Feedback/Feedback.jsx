@@ -3,26 +3,36 @@ import './Feedback.css';
 import { toast } from 'react-toastify';
 import { StoreContext } from '../../Context/StoreContext';
 
+const BASE_URL = 'http://localhost:4000';
+
+
 const Feedback = () => {
     const [rating, setRating] = useState(0);
     const [submitted, setSubmitted] = useState(false);
-    const { user } = useContext(StoreContext);
+    const { token, user } = useContext(StoreContext);
 
     const handleRatingClick = (star) => {
         setRating(star);
+        console.log(user, star);
     };
 
     const handleSubmit = async () => {
-        if (submitted) {
-            return;
-        }
-
+       
         try {
-            if (!user || !user.email) {
-                throw new Error('User data is missing or incomplete');
+            if (!token) {
+                toast.error("Pentru a lăsa o recenzie este necesară autentificarea");
+                return;
             }
-
-            const response = await fetch('/api/feedback/add', {
+            
+            const feedbackResponse = await fetch(`${BASE_URL}/api/feedback/${user.email}`);
+            const feedbackData = await feedbackResponse.json();
+    
+            if (feedbackData.length > 0) {
+                toast.warn("Ai trimis deja un feedback.");
+                return;
+            }
+            
+            const response = await fetch(`${BASE_URL}/api/feedback/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,7 +42,6 @@ const Feedback = () => {
                     feedback: rating
                 }),
             });
-
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

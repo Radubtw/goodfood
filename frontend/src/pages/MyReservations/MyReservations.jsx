@@ -46,8 +46,8 @@
                 <div key={index} className='my-reservations-reservation'>
                 <img src={assets.table_icon} alt="" />
                 <p>Date: {formatDate(reservation.date)}</p>
-                <p>Ora: {reservation.hour}</p>
-                <p>Capacitate: {reservation.capacity}</p>
+                <p>Ora: {reservation.hour}:00</p>
+                <p>Capacitate masă: {reservation.capacity} persoane</p>
                 </div>
             )
             })}

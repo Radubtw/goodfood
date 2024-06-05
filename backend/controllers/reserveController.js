@@ -27,7 +27,6 @@ const addReservation = async (req, res) => {
 // List all reservations
 const listReservations = async (req, res) => {
     try {
-        // Retrieve all reservations from the database
         const reservations = await reserveModel.find({});
         res.json({ success: true, data: reservations });
     } catch (error) {

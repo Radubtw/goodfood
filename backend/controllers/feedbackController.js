@@ -21,4 +21,16 @@ const addFeedback = async (req, res) => {
     }
 };
 
-export { addFeedback };
+const getFeedbackByEmail = async (req, res) => {
+    const { email } = req.params;
+    try {
+        // Query the database for feedback records associated with the provided email
+        const feedback = await feedbackModel.find({ email: email });
+        res.json(feedback);
+    } catch (error) {
+        console.error('Error fetching feedback by email:', error);
+        res.status(500).json({ success: false, message: "Error fetching feedback" });
+    }
+};
+
+export { addFeedback, getFeedbackByEmail };
