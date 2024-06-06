@@ -56,10 +56,11 @@ const ReserveTable = () => {
             toast.error("Ora introdusa nu este valida, te rugam introdu o ora din intervalul 10-23")
             return;
         }
-        if(reservationData.date < Date.now()){
+        if(new Date(reservationData.date) < new Date()){
             toast.error("Data introdusa nu este valida");
             return;
         }
+        
         try {
             const response = await fetch(`${BASE_URL}/api/reserve/add`, {
                 method: 'POST',
