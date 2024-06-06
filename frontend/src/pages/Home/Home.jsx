@@ -4,6 +4,7 @@ import ExploreMenu from '../../components/ExploreMenu/ExploreMenu'
 import FoodDisplay from '../../components/FoodDisplay/FoodDisplay'
 import ReserveTable from '../../components/ReserveTable/ReserveTable'
 import Feedback from '../../components/Feedback/Feedback'
+import AverageFeedback from '../../components/AverageFeedback/AverageFeedback'
 
 const Home = () => {
 

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import './Feedback.css';
 import { toast } from 'react-toastify';
 import { StoreContext } from '../../Context/StoreContext';
+import AverageFeedback from '../AverageFeedback/AverageFeedback';
 
 const BASE_URL = 'http://localhost:4000';
 
@@ -77,6 +78,7 @@ const Feedback = () => {
                 </div>
                 <button  onClick={handleSubmit}>Submit</button>
             </div>
+            <AverageFeedback/>
         </div>
     );
 };

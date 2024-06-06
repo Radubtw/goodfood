@@ -33,4 +33,20 @@ const getFeedbackByEmail = async (req, res) => {
     }
 };
 
-export { addFeedback, getFeedbackByEmail };
+const getAverageRating = async (req, res) => {
+    try {
+      const feedbacks = await feedbackModel.find();
+      if (!feedbacks) {
+        return res.status(404).json({ message: "No feedback found" });
+      }
+  
+      const totalFeedback = feedbacks.reduce((acc, feedback) => acc + feedback.feedback, 0);
+      const averageFeedback = totalFeedback / feedbacks.length;
+      res.status(200).json({ averageFeedback });
+    } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ message: "Server error" });
+    }
+  };
+
+export { addFeedback, getFeedbackByEmail, getAverageRating };

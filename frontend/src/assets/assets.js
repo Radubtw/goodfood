@@ -54,6 +54,7 @@ import bag_icon from './bag_icon.png'
 import reservations_icon from './reservations_icon.png'
 import logout_icon from './logout_icon.png'
 import parcel_icon from './parcel_icon.png'
+import star_icon from './star.png'
 
 import table from './table.png'
 
@@ -71,6 +72,7 @@ export const assets = {
     bag_icon,
     reservations_icon,
     parcel_icon,
+    star_icon,
     table
 }
 

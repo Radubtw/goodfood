@@ -14,8 +14,7 @@ const Footer = () => {
             <ul>
                 <li>Adresă:  Calea Victoriei Nr. 95</li>
                 <li><h3>Program:</h3></li>
-                <li>Luni-Vineri: 10-24</li>
-                <li>Sâmbătă-Duminică: 12-23</li>
+                <li>Luni-Duminică: 10-24</li>
             </ul>
         </div>
         <div className="footer-content-right">
