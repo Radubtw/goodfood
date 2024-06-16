@@ -99,7 +99,7 @@ const PlaceOrder = () => {
                         <div className="cart-total-details"><b>Total</b><b>{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 5} RON </b></div>
                     </div>
                 </div>
-                <button className='place-order-submit' type='submit'>Continuați plata</button>
+                <button className='place-order-submit' type='submit'>Plasați comanda</button>
             </div>
         </form>
     )

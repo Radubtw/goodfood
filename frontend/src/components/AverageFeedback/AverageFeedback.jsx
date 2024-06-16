@@ -23,7 +23,7 @@ const AverageFeedback = () => {
 
   return (
     <div className="average-feedback-container">
-      <h3>Feedback General</h3>
+      <h3>Feedback  </h3>
       <div className="average-rating">
         {averageFeedback !== null && averageFeedback !== undefined ? (
           <div className="rating-container">
